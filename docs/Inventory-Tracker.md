@@ -14,3 +14,14 @@ When a user signs up, they are encouraged to track their inventory and the price
 6. Click Submit Button
 7. See Success Message and Empty Inventory Table
 8. Repeat Steps 2-7 for multiple items
+
+## Existing Inventory
+
+When in the "Add Inventory" Form, users should be able to see a list of existing inventory available globally. These items will have to be managed by admins, but they can contain links to Amazon and other sites that sell the item.
+
+## Database
+
+- The `inventory_item` database contains both globally public records as well as user-specific records.
+- Globally public records will have `null` for `user_id`.
+- Globally public records will not have a price associated with them.
+- Privately owned inventory items can be listed multiple times with multiple prices, because crafters can buy their raw materials on sale.
