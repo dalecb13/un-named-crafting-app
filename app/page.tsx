@@ -18,7 +18,7 @@ import {
   FaYoutube
 } from 'react-icons/fa6';
 import { 
- Lock, CreditCard, Moon
+  Lock, CreditCard, Moon
 } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';

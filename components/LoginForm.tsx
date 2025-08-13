@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ForgotPasswordModal } from './ForgotPasswordModal';
 import Image from 'next/image';
+import { HeartHandshake } from 'lucide-react';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string, isSignUp: boolean) => Promise<void>;
@@ -31,9 +32,8 @@ export function LoginForm({
     <div className="w-full space-y-8 p-8 bg-surface-light dark:bg-surface-dark rounded-2xl shadow-subtle border border-gray-200 dark:border-gray-700">
       <div className="text-center">
         <div className="flex items-center justify-center gap-2 mb-6">
-          <span className="text-3xl">🎬</span>
           <h2 className="text-2xl font-medium text-text dark:text-text-dark">
-            NextTemp
+            <span className="flex flex-row items-center font-sans">H<HeartHandshake className="h-4 w-4 flex align-end" />NDMade</span>
           </h2>
         </div>
       </div>
