@@ -40,10 +40,14 @@ Global Inventory
 Private Inventory
 
 - id: uuid
+- global_id: uuid (optional, fk to `global_inventory_item`)
 - item_name: varchar/text (unique)
 - parent_company: varchar/text (index)
 - links: json
 - owner_id: foreign key to users table (index)
 - price: decimal
+- price_per_unit: double
 - image_link: varchar/text
 - tags: json (index)
+- quantity: double
+- quantity_unit: varchar/text
