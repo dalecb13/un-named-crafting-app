@@ -21,7 +21,29 @@ When in the "Add Inventory" Form, users should be able to see a list of existing
 
 ## Database
 
-- The `inventory_item` database contains both globally public records as well as user-specific records.
+- The `inventory_item` database table contains both globally public records as well as user-specific records.
 - Globally public records will have `null` for `user_id`.
 - Globally public records will not have a price associated with them.
 - Privately owned inventory items can be listed multiple times with multiple prices, because crafters can buy their raw materials on sale.
+
+### Estimated Schemas
+
+Global Inventory
+
+- id: uuid
+- item_name: varchar/text (unique) (index)
+- parent_company: varchar/text (index)
+- links: json
+- image_link: varchar/text
+- tags: json (index)
+
+Private Inventory
+
+- id: uuid
+- item_name: varchar/text (unique)
+- parent_company: varchar/text (index)
+- links: json
+- owner_id: foreign key to users table (index)
+- price: decimal
+- image_link: varchar/text
+- tags: json (index)
