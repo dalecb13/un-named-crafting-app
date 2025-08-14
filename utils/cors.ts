@@ -4,6 +4,7 @@ import type { NextRequest } from 'next/server';
 function getCorsHeaders(request: NextRequest) {
   const allowedOrigins = [
     'http://localhost:3000',
+    'http://localhost:3001',
     "https://hndmade.vercel.app",
     "https://hndmade.art",
   ];

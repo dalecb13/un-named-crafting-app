@@ -120,11 +120,20 @@ export default function Inventory() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-foreground mb-4 mx-auto"></div>
-        <p className="text-foreground">Inventory</p>
+    <div className="min-h-screen flex">
+      <div className="p-8 w-full flex justify-between">
+        <h1>Inventory Table</h1>
+
+        <button
+          onClick={() => router.push('/inventory/add')}
+          className="hidden sm:block px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-medium transition-colors shadow-subtle hover:shadow-hover"
+        >
+          Add Inventory
+        </button>
       </div>
+      {/* <div className="text-center">
+        <p className="text-foreground">Inventory</p>
+      </div> */}
     </div>
   );
 }

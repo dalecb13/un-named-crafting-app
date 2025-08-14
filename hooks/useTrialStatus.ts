@@ -50,6 +50,7 @@ export function useTrialStatus() {
           // Check if trial is still valid
           const now = new Date();
           const endTime = new Date(trial.trial_end_time);
+          console.log('endTime', endTime)
           const isInTrial = !trial.is_trial_used && now < endTime;
 
           setTrialStatus({

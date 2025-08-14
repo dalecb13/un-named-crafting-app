@@ -94,7 +94,7 @@ export default function Dashboard() {
   const { subscription, isLoading: isSubLoading, fetchSubscription } = useSubscription();
   const [hasCheckedSubscription, setHasCheckedSubscription] = useState(false);
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
-  const { isInTrial, isLoading: isTrialLoading } = useTrialStatus();
+  const { isInTrial, trialEndTime, isLoading: isTrialLoading } = useTrialStatus();
   const [authTimeout, setAuthTimeout] = useState(false);
 
   // Add new states for dashboard functionality
@@ -222,7 +222,13 @@ export default function Dashboard() {
             </h1>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-slate-600 dark:text-slate-300">
-                {isInTrial ? "Trial Period" : "Premium Plan"}
+                {
+                  isInTrial
+                    ? trialEndTime === null
+                      ? "Trial Period"
+                      : `Trial Period ends ${new Date(trialEndTime).toLocaleDateString()}`
+                      : "Premium Plan"
+                }
               </span>
             </div>
           </div>
