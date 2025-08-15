@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import { AddInventoryDto, addPrivateInventory } from "@/data-access/private-inventory";
 import { AddPrivateInventoryError } from "@/utils/error";
 import QuantityAndUnitFormField from "./QuantityAndUnitFormField";
+import CurrencyFormField from "./CurrencyFormField";
 
 const AddInventoryForm = () => {
   const [error, setError] = useState('');
@@ -17,6 +18,9 @@ const AddInventoryForm = () => {
 
   const [isPending, startTransition] = useTransition();
 
+  const handleChangeQuantityUnit = (quantityUnit: string) => {
+    setQuantityUnit(quantityUnit);
+  }
 
   const addInventoryItemAction = async () => {
     startTransition(async () => {
@@ -55,7 +59,7 @@ const AddInventoryForm = () => {
         <Input
           className="w-full"
           type="text"
-          placeholder="Clay"
+          placeholder="Product Name"
           value={itemName}
           onChange={(e) => setItemName(e.target.value)}
         />
@@ -63,7 +67,7 @@ const AddInventoryForm = () => {
         <Input
           className="w-full"
           type="text"
-          placeholder="Sculpey"
+          placeholder="Parent Company"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
@@ -73,17 +77,17 @@ const AddInventoryForm = () => {
           handleChangeQuantity={setQuantity}
           units={['g', 'oz', 'lb']}
           unit={quantityUnit}
-          handleChangeQuantityUnit={setQuantityUnit}
+          handleChangeQuantityUnit={(unit) => handleChangeQuantityUnit(unit)}
         />
 
-        <Input
-          className="w-full"
-          type="number"
-          placeholder="Total price"
-          value={totalPrice}
-          onChange={(e) => setTotalPrice(Number(e.target.value))}
+        <CurrencyFormField
+          currencies={['USD', 'EUR', 'GBP']}
+          currency="USD"
+          handleChangeCurrency={() => {}}
+          amount={totalPrice.toString()}
+          handleChangeAmount={() => {}}
         />
-        
+
         <Button
           type="submit"
           disabled={isPending}

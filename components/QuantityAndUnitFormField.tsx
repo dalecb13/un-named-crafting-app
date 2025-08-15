@@ -33,9 +33,6 @@ const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, handleChangeQuant
               <SelectItem key={unit} value={unit}>{unit}</SelectItem>
             ))
           }
-          {/* <SelectItem value="light">Light</SelectItem>
-          <SelectItem value="dark">Dark</SelectItem>
-          <SelectItem value="system">System</SelectItem> */}
         </SelectContent>
       </Select>
     </div>
