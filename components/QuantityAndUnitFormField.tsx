@@ -20,14 +20,22 @@ const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, handleChangeQuant
         onChange={(e) => handleChangeQuantity(Number(e.target.value))}
       />
 
-      <Select>
+      <Select
+        value={unit}
+        onValueChange={() => handleChangeQuantityUnit}
+      >
         <SelectTrigger className="w-[80px] right-0 top-0 bottom-0 rounded-none rounded-r-lg">
           <SelectValue placeholder="Unit" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="light">Light</SelectItem>
+          {
+            units.map((unit) => (
+              <SelectItem key={unit} value={unit}>{unit}</SelectItem>
+            ))
+          }
+          {/* <SelectItem value="light">Light</SelectItem>
           <SelectItem value="dark">Dark</SelectItem>
-          <SelectItem value="system">System</SelectItem>
+          <SelectItem value="system">System</SelectItem> */}
         </SelectContent>
       </Select>
     </div>
