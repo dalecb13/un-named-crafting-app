@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "./ui/button";
 import { AddInventoryDto, addPrivateInventory } from "@/data-access/private-inventory";
 import { AddPrivateInventoryError } from "@/utils/error";
+import QuantityAndUnitFormField from "./QuantityAndUnitFormField";
 
 const AddInventoryForm = () => {
   const [error, setError] = useState('');
@@ -67,28 +68,20 @@ const AddInventoryForm = () => {
           onChange={(e) => setCompany(e.target.value)}
         />
 
+        <QuantityAndUnitFormField
+          quantity={quantity}
+          handleChangeQuantity={setQuantity}
+          units={['g', 'oz', 'lb']}
+          unit={quantityUnit}
+          handleChangeQuantityUnit={setQuantityUnit}
+        />
+
         <Input
           className="w-full"
           type="number"
           placeholder="Total price"
           value={totalPrice}
           onChange={(e) => setTotalPrice(Number(e.target.value))}
-        />
-
-        <Input
-          className="w-full"
-          type="number"
-          placeholder="Quantity"
-          value={quantity}
-          onChange={(e) => setQuantity(Number(e.target.value))}
-        />
-
-        <Input
-          className="w-full"
-          type="number"
-          placeholder="grams"
-          value={quantityUnit}
-          onChange={(e) => setQuantityUnit(e.target.value)}
         />
         
         <Button
