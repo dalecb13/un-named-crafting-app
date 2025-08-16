@@ -7,6 +7,7 @@ import { AddInventoryDto, addPrivateInventory } from "@/data-access/private-inve
 import { AddPrivateInventoryError } from "@/utils/error";
 import QuantityAndUnitFormField from "./QuantityAndUnitFormField";
 import CurrencyFormField from "./CurrencyFormField";
+import { Label } from "./ui/label";
 
 const UNITS = ['g', 'oz', 'lb']
 
@@ -59,37 +60,72 @@ const AddInventoryForm = () => {
         className="space-y-4"
         action={addInventoryItemAction}
       >
-        <Input
-          className="w-full"
-          type="text"
-          placeholder="Product Name"
-          value={itemName}
-          onChange={(e) => setItemName(e.target.value)}
-        />
 
-        <Input
-          className="w-full"
-          type="text"
-          placeholder="Parent Company"
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
-        />
+        <div className="space-y-2">
+          <Label
+            htmlFor="itemName"
+            className="text-sm font-medium text-slate-700"
+          >
+            Item Name
+          </Label>
+          <Input
+            id="itemName"
+            className="w-full"
+            type="text"
+            placeholder="White Polymer Clay"
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
+          />
+        </div>
 
-        <QuantityAndUnitFormField
-          quantity={quantity}
-          onChangeQuantity={setQuantity}
-          units={UNITS}
-          unit={quantityUnit}
-          handleChangeQuantityUnit={(unit) => handleChangeQuantityUnit(unit)}
-        />
+        <div className="space-y-2">
+          <Label
+            htmlFor="companyName"
+            className="text-sm font-medium text-slate-700 mb-2"
+          >
+            Company
+          </Label>
+          <Input
+            id="companyName"
+            className="w-full"
+            type="text"
+            placeholder="Sculpey"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
+          />
+        </div>
 
-        <CurrencyFormField
-          currencies={['USD', 'EUR', 'GBP']}
-          currency="USD"
-          handleChangeCurrency={() => {}}
-          amount={totalPrice.toString()}
-          handleChangeAmount={() => {}}
-        />
+        <div className="space-y-2">
+          <Label
+            htmlFor="quantityAndUnit"
+            className="text-sm font-medium text-slate-700 mb-2"
+          >
+            Quantity
+          </Label>
+          <QuantityAndUnitFormField
+            quantity={quantity}
+            onChangeQuantity={setQuantity}
+            units={UNITS}
+            unit={quantityUnit}
+            handleChangeQuantityUnit={(unit) => handleChangeQuantityUnit(unit)}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label
+            htmlFor="quantityAndUnit"
+            className="text-sm font-medium text-slate-700 mb-2"
+          >
+            Total Price
+          </Label>
+          <CurrencyFormField
+            currencies={['USD', 'EUR', 'GBP']}
+            currency="USD"
+            handleChangeCurrency={() => {}}
+            amount={totalPrice.toString()}
+            handleChangeAmount={() => {}}
+          />
+        </div>
 
         <Button
           type="submit"
