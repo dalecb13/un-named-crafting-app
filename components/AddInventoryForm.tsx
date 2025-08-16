@@ -36,6 +36,7 @@ const AddInventoryForm = () => {
         quantity,
         quantityUnit,
       }
+      console.log('dto', dto)
 
       try {
         const data = await addPrivateInventory(dto);
@@ -121,9 +122,9 @@ const AddInventoryForm = () => {
           <CurrencyFormField
             currencies={['USD', 'EUR', 'GBP']}
             currency="USD"
-            handleChangeCurrency={() => {}}
-            amount={totalPrice.toString()}
-            handleChangeAmount={() => {}}
+            onChangeCurrency={() => {}}
+            totalPrice={totalPrice.toString()}
+            onChangePrice={() => {}}
           />
         </div>
 

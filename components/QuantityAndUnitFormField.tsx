@@ -10,6 +10,7 @@ type Props = {
 }
 
 const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, onChangeQuantity, units, unit, handleChangeQuantityUnit }) => {
+  
   return (
     <div className="relative inline-flex w-full">
       <Input
@@ -22,7 +23,7 @@ const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, onChangeQuantity,
 
       <Select
         value={unit}
-        onValueChange={() => handleChangeQuantityUnit}
+        onValueChange={handleChangeQuantityUnit}
       >
         <SelectTrigger className="w-[80px] right-0 top-0 bottom-0 rounded-none rounded-r-lg">
           <SelectValue placeholder="Unit" />
