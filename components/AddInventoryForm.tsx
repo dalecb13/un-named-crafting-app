@@ -15,6 +15,7 @@ const AddInventoryForm = () => {
   const [error, setError] = useState('');
   const [itemName, setItemName] = useState('');
   const [company, setCompany] = useState('');
+  const [currency, setCurrency] = useState('USD');
   const [totalPrice, setTotalPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [quantityUnit, setQuantityUnit] = useState(UNITS[0]);
@@ -31,8 +32,8 @@ const AddInventoryForm = () => {
       const dto: AddInventoryDto = {
         itemName,
         company,
-        price: 0,
-        currency: 'USD',
+        price: totalPrice,
+        currency,
         quantity,
         quantityUnit,
       }
@@ -121,10 +122,10 @@ const AddInventoryForm = () => {
           </Label>
           <CurrencyFormField
             currencies={['USD', 'EUR', 'GBP']}
-            currency="USD"
-            onChangeCurrency={() => {}}
+            currency={currency}
+            onChangeCurrency={setCurrency}
             totalPrice={totalPrice.toString()}
-            onChangePrice={() => {}}
+            onChangeTotalPrice={(tpString) => setTotalPrice(Number(tpString))}
           />
         </div>
 

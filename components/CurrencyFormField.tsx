@@ -6,10 +6,10 @@ type Props = {
   currency: string,
   onChangeCurrency: (currency: string) => void
   totalPrice: string,
-  onChangePrice: (amount: string) => void
+  onChangeTotalPrice: (amount: string) => void
 }
 
-const CurrencyFormField: React.FC<Props> = ({ currencies, currency, onChangeCurrency, totalPrice, onChangePrice}) => {
+const CurrencyFormField: React.FC<Props> = ({ currencies, currency, onChangeCurrency, totalPrice, onChangeTotalPrice}) => {
   return (
     <div className="relative inline-flex w-full">
       <Select
@@ -33,7 +33,7 @@ const CurrencyFormField: React.FC<Props> = ({ currencies, currency, onChangeCurr
         type="number"
         placeholder="Price"
         value={totalPrice}
-        onChange={(e)=> onChangePrice(e.target.value)}
+        onChange={(e)=> onChangeTotalPrice(e.target.value)}
       />
     </div>
   )

@@ -6,7 +6,6 @@ export type AddInventoryDto = {
   company: string
   price: number
   currency: string
-  pricePerUnit: number
   quantity: number
   quantityUnit: string
 }
@@ -37,8 +36,8 @@ const addPrivateInventory = async (dto: AddInventoryDto) => {
         item_name: dto.itemName,
         company: dto.company,
         price: dto.price,
-        // currency: dto.currency,
-        price_per_unit: dto.pricePerUnit,
+        currency: dto.currency,
+        // price_per_unit: dto.pricePerUnit,
         quantity: dto.quantity,
         quantity_unit: dto.quantityUnit
       });
