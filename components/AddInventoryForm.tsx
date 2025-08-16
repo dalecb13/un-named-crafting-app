@@ -8,18 +8,21 @@ import { AddPrivateInventoryError } from "@/utils/error";
 import QuantityAndUnitFormField from "./QuantityAndUnitFormField";
 import CurrencyFormField from "./CurrencyFormField";
 
+const UNITS = ['g', 'oz', 'lb']
+
 const AddInventoryForm = () => {
   const [error, setError] = useState('');
   const [itemName, setItemName] = useState('');
   const [company, setCompany] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
-  const [quantityUnit, setQuantityUnit] = useState('');
+  const [quantityUnit, setQuantityUnit] = useState(UNITS[0]);
 
   const [isPending, startTransition] = useTransition();
 
-  const handleChangeQuantityUnit = (quantityUnit: string) => {
-    setQuantityUnit(quantityUnit);
+  const handleChangeQuantityUnit = (unit: string) => {
+    console.log('handleChangeQuantityUnit', unit)
+    setQuantityUnit(unit);
   }
 
   const addInventoryItemAction = async () => {
@@ -74,8 +77,8 @@ const AddInventoryForm = () => {
 
         <QuantityAndUnitFormField
           quantity={quantity}
-          handleChangeQuantity={setQuantity}
-          units={['g', 'oz', 'lb']}
+          onChangeQuantity={setQuantity}
+          units={UNITS}
           unit={quantityUnit}
           handleChangeQuantityUnit={(unit) => handleChangeQuantityUnit(unit)}
         />

@@ -3,13 +3,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 
 type Props = {
   quantity: number;
-  handleChangeQuantity: (quantity: number) => void;
+  onChangeQuantity: (quantity: number) => void;
   units: string[];
   unit: string;
   handleChangeQuantityUnit: (quantityUnit: string) => void;
 }
 
-const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, handleChangeQuantity, units, unit, handleChangeQuantityUnit }) => {
+const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, onChangeQuantity, units, unit, handleChangeQuantityUnit }) => {
   return (
     <div className="relative inline-flex w-full">
       <Input
@@ -17,7 +17,7 @@ const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, handleChangeQuant
         type="number"
         placeholder="Quantity"
         value={quantity}
-        onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+        onChange={(e) => onChangeQuantity(Number(e.target.value))}
       />
 
       <Select
@@ -29,8 +29,13 @@ const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, handleChangeQuant
         </SelectTrigger>
         <SelectContent>
           {
-            units.map((unit) => (
-              <SelectItem key={unit} value={unit}>{unit}</SelectItem>
+            units.map((unitOption) => (
+              <SelectItem
+                key={unitOption}
+                value={unitOption}
+              >
+                {unitOption}
+              </SelectItem>
             ))
           }
         </SelectContent>
