@@ -13,41 +13,45 @@ type Props = {
 const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, onChangeQuantity, units, unit, handleChangeQuantityUnit }) => {
   
   return (
-    <div className="relative inline-flex w-full space-y-2">
+    <div className="w-full space-y-2">
       <Label
         htmlFor="quantityAndUnit"
         className="text-sm font-medium text-slate-700 mb-2"
       >
         Total Price
       </Label>
-      <Input
-        className="w-full rounded-none rounded-l-lg"
-        type="number"
-        placeholder="Quantity"
-        value={quantity}
-        onChange={(e) => onChangeQuantity(Number(e.target.value))}
-      />
+      <div className="relative inline-flex w-full">
+        <Input
+          id="quantityAndUnit"
+          className="w-full rounded-none rounded-l-lg"
+          type="number"
+          placeholder="Quantity"
+          value={quantity}
+          onChange={(e) => onChangeQuantity(Number(e.target.value))}
+        />
 
-      <Select
-        value={unit}
-        onValueChange={handleChangeQuantityUnit}
-      >
-        <SelectTrigger className="w-[80px] right-0 top-0 bottom-0 rounded-none rounded-r-lg">
-          <SelectValue placeholder="Unit" />
-        </SelectTrigger>
-        <SelectContent>
-          {
-            units.map((unitOption) => (
-              <SelectItem
-                key={unitOption}
-                value={unitOption}
-              >
-                {unitOption}
-              </SelectItem>
-            ))
-          }
-        </SelectContent>
-      </Select>
+        <Select
+          name="unit"
+          value={unit}
+          onValueChange={handleChangeQuantityUnit}
+        >
+          <SelectTrigger className="w-[80px] right-0 top-0 bottom-0 rounded-none rounded-r-lg">
+            <SelectValue placeholder="Unit" />
+          </SelectTrigger>
+          <SelectContent>
+            {
+              units.map((unitOption) => (
+                <SelectItem
+                  key={unitOption}
+                  value={unitOption}
+                >
+                  {unitOption}
+                </SelectItem>
+              ))
+            }
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   )
 }
