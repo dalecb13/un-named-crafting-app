@@ -39,7 +39,6 @@ export const InventoryTable = () => {
 
   useEffect(() => {
     if (user?.id) {
-      // Get user's inventory
       const getInventory = async () => {
         const data = await getPrivateInventory();
 
@@ -76,9 +75,9 @@ export const InventoryTable = () => {
   }
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between px-8">
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableCaption>A list of your inventory.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead>Item Name</TableHead>
@@ -87,12 +86,6 @@ export const InventoryTable = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {/* <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Item Name</TableCell>
-            <TableCell>Quantity</TableCell>
-          </TableRow> */}
-
           {
             inventoryItems.map(inventoryItem => {
               return (
