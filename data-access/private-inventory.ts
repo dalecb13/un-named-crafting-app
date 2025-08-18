@@ -36,7 +36,7 @@ const addPrivateInventory = async (dto: AddInventoryDto) => {
         item_name: dto.itemName,
         company: dto.company,
         price: dto.price,
-        currency: dto.currency,
+        parent_currency: dto.currency,
         // price_per_unit: dto.pricePerUnit,
         quantity: dto.quantity,
         quantity_unit: dto.quantityUnit

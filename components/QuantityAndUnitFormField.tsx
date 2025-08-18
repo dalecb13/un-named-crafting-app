@@ -1,4 +1,5 @@
 import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 type Props = {
@@ -12,7 +13,13 @@ type Props = {
 const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, onChangeQuantity, units, unit, handleChangeQuantityUnit }) => {
   
   return (
-    <div className="relative inline-flex w-full">
+    <div className="relative inline-flex w-full space-y-2">
+      <Label
+        htmlFor="quantityAndUnit"
+        className="text-sm font-medium text-slate-700 mb-2"
+      >
+        Total Price
+      </Label>
       <Input
         className="w-full rounded-none rounded-l-lg"
         type="number"

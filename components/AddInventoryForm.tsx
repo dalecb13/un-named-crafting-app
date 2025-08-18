@@ -8,11 +8,11 @@ import { AddPrivateInventoryError } from "@/utils/error";
 import QuantityAndUnitFormField from "./QuantityAndUnitFormField";
 import CurrencyFormField from "./CurrencyFormField";
 import { Label } from "./ui/label";
+import { toast } from "sonner"
 
 const UNITS = ['g', 'oz', 'lb']
 
 const AddInventoryForm = () => {
-  const [error, setError] = useState('');
   const [itemName, setItemName] = useState('');
   const [company, setCompany] = useState('');
   const [currency, setCurrency] = useState('USD');
@@ -21,11 +21,6 @@ const AddInventoryForm = () => {
   const [quantityUnit, setQuantityUnit] = useState(UNITS[0]);
 
   const [isPending, startTransition] = useTransition();
-
-  const handleChangeQuantityUnit = (unit: string) => {
-    console.log('handleChangeQuantityUnit', unit)
-    setQuantityUnit(unit);
-  }
 
   const addInventoryItemAction = async () => {
     startTransition(async () => {
@@ -37,10 +32,10 @@ const AddInventoryForm = () => {
         quantity,
         quantityUnit,
       }
-      console.log('dto', dto)
 
       try {
         const data = await addPrivateInventory(dto);
+        toast("Inventory added successfully")
         console.log('data: ', data);
 
         setItemName('');
@@ -50,7 +45,8 @@ const AddInventoryForm = () => {
         setQuantityUnit('');
       } catch (err) {
         if (err instanceof AddPrivateInventoryError) {
-          setError(err.message);
+          // setError(err.message);
+          toast("There was an error adding the item.\nPlease try again.")
         }
       }
     })
@@ -97,37 +93,21 @@ const AddInventoryForm = () => {
           />
         </div>
 
-        <div className="space-y-2">
-          <Label
-            htmlFor="quantityAndUnit"
-            className="text-sm font-medium text-slate-700 mb-2"
-          >
-            Quantity
-          </Label>
-          <QuantityAndUnitFormField
-            quantity={quantity}
-            onChangeQuantity={setQuantity}
-            units={UNITS}
-            unit={quantityUnit}
-            handleChangeQuantityUnit={(unit) => handleChangeQuantityUnit(unit)}
-          />
-        </div>
+        <QuantityAndUnitFormField
+          quantity={quantity}
+          onChangeQuantity={(q) => setQuantity(q)}
+          units={UNITS}
+          unit={quantityUnit}
+          handleChangeQuantityUnit={(u) => setQuantityUnit(u)}
+        />
 
-        <div className="space-y-2">
-          <Label
-            htmlFor="quantityAndUnit"
-            className="text-sm font-medium text-slate-700 mb-2"
-          >
-            Total Price
-          </Label>
-          <CurrencyFormField
-            currencies={['USD', 'EUR', 'GBP']}
-            currency={currency}
-            onChangeCurrency={setCurrency}
-            totalPrice={totalPrice.toString()}
-            onChangeTotalPrice={(tpString) => setTotalPrice(Number(tpString))}
-          />
-        </div>
+        <CurrencyFormField
+          currencies={['USD', 'EUR', 'GBP']}
+          currency={currency}
+          onChangeCurrency={setCurrency}
+          totalPrice={totalPrice.toString()}
+          onChangeTotalPrice={(tpString) => setTotalPrice(Number(tpString))}
+        />
 
         <Button
           type="submit"

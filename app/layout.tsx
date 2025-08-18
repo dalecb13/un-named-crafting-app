@@ -5,7 +5,8 @@ import "./globals.css";
 import { AuthProvider } from '@/contexts/AuthContext';
 import TopBar from '../components/TopBar';
 import ProtectedRoute from '@/contexts/ProtectedRoute';
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "@/components/ui/sonner";
 // import { PostHogProvider } from '@/contexts/PostHogContext';
 // import { PostHogErrorBoundary } from '@/components/PostHogErrorBoundary';
 
@@ -27,6 +28,7 @@ export default function RootLayout({
                   <TopBar />    
                   <main>{children}</main>
                 </ProtectedRoute>
+                <Toaster />
             </AuthProvider>
           {/* </PostHogProvider>
         </PostHogErrorBoundary> */}
