@@ -9,10 +9,13 @@ import QuantityAndUnitFormField from "./QuantityAndUnitFormField";
 import CurrencyFormField from "./CurrencyFormField";
 import { Label } from "./ui/label";
 import { toast } from "sonner"
+import { useAuth } from "@/contexts/AuthContext";
 
 const UNITS = ['g', 'oz', 'lb']
 
 const AddInventoryForm = () => {
+  const { user } = useAuth();
+
   const [itemName, setItemName] = useState('');
   const [company, setCompany] = useState('');
   const [currency, setCurrency] = useState('USD');
@@ -23,6 +26,9 @@ const AddInventoryForm = () => {
   const [isPending, startTransition] = useTransition();
 
   const addInventoryItemAction = async () => {
+    if (!user) {
+      return;
+    }
     startTransition(async () => {
       const dto: AddInventoryDto = {
         itemName,
@@ -31,6 +37,7 @@ const AddInventoryForm = () => {
         currency,
         quantity,
         quantityUnit,
+        ownerId: user.id,
       }
 
       try {

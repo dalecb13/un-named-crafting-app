@@ -1,5 +1,6 @@
 "use client";
 
+import { InventoryTable } from "@/components/InventoryTable";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useTrialStatus } from "@/hooks/useTrialStatus";
@@ -120,7 +121,7 @@ export default function Inventory() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex flex-col">
       <div className="p-8 w-full flex justify-between">
         <h1>Inventory Table</h1>
 
@@ -131,9 +132,8 @@ export default function Inventory() {
           Add Inventory
         </button>
       </div>
-      {/* <div className="text-center">
-        <p className="text-foreground">Inventory</p>
-      </div> */}
+
+      <InventoryTable />
     </div>
   );
 }

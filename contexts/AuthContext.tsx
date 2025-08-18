@@ -3,10 +3,9 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { supabase } from '@/utils/supabase';
 import { 
-  Session, 
-  User, 
-  SupabaseClient, 
-  AuthTokenResponse 
+  Session,
+  User,
+  SupabaseClient,
 } from '@supabase/supabase-js';
 
 interface AuthContextType {

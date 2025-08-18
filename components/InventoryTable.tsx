@@ -2,9 +2,10 @@
 
 import { useAuth } from '@/contexts/AuthContext';
 import { useTrialStatus } from '@/hooks/useTrialStatus';
-import { supabase } from '@/utils/supabase';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Button } from './ui/button';
+import { getPrivateInventory, InventoryItem } from '@/data-access/private-inventory';
 
 const AUTH_TIMEOUT = 15000; // 15 seconds
 
@@ -15,6 +16,7 @@ export const InventoryTable = () => {
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
   const [authTimeout, setAuthTimeout] = useState(false);
   const [ isNoData, setIsNoData ] = useState(true);
+  const [ inventoryItems, setInventoryItems] = useState<InventoryItem[]>([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,20 +30,15 @@ export const InventoryTable = () => {
 
   useEffect(() => {
     if (user?.id) {
-      // Check if user has completed onboarding
-      const checkOnboarding = async () => {
-        const { data } = await supabase
-          .from('private_inventory_item')
-          .select()
-          .eq('owner_id', user.id)
-          .single();
+      // Get user's inventory
+      const getInventory = async () => {
+        const data = await getPrivateInventory();
 
-        if (!data) {
-          setIsNoData(true);
-        }
+        setIsNoData(false);
+        setInventoryItems(data);
       };
       
-      checkOnboarding();
+      getInventory();
     }
   }, [user?.id, hasCompletedOnboarding]);
 
@@ -62,28 +59,24 @@ export const InventoryTable = () => {
 
   if (isNoData) {
     return (
-      <div className="flex justify-between">
-        <h1>Inventory Table</h1>
-        <button
-          onClick={() => router.push('/inventory/add')}
-          className="hidden sm:block px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-medium transition-colors shadow-subtle hover:shadow-hover"
-        >
-          Add Inventory
-        </button>
+      <div className="flex flex-col justify-between items-center space-y-2">
+        <p>No data found. Create one?</p>
+        <Button onClick={() => router.push('/inventory/add')}>Add Inventory</Button>
       </div>
     )
   }
 
   return (
     <div className="flex justify-between">
-      <h1>Inventory Table</h1>
-
-      <button
-        onClick={() => router.push('/inventory/add')}
-        className="hidden sm:block px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-medium transition-colors shadow-subtle hover:shadow-hover"
-      >
-        Add Inventory
-      </button>
+      {
+        inventoryItems.map(inventoryItem => {
+          return (
+            <div key={inventoryItem.id}>
+              {inventoryItem.name}
+            </div>
+          )
+        })
+      }
     </div>
   )
 }

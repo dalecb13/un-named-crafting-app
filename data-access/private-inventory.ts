@@ -1,4 +1,4 @@
-import { AddPrivateInventoryError } from "@/utils/error"
+import { AddPrivateInventoryError, GetPrivateEnventoryError } from "@/utils/error"
 import { supabase } from "@/utils/supabase"
 
 export type AddInventoryDto = {
@@ -8,24 +8,42 @@ export type AddInventoryDto = {
   currency: string
   quantity: number
   quantityUnit: string
+  ownerId: string
 }
 
-const getPrivateInventory = async () => {
-  try {
-    const { data, error } = await supabase
-      .from('private_inventory_item')
-      .select("*");
+export type InventoryItem = {
+  id: string;
+  name: string;
+  company: string;
+  quantity: number;
+  unit: string;
+}
 
-    if (error) {
-      console.error('Error fetching private inventory:', error);
-      return [];
-    }
+const getPrivateInventory = async (): Promise<InventoryItem[]> => {
+  const { data, error } = await supabase
+    .from('private_inventory_item')
+    .select("*");
 
-    return data
-  } catch (e) {
-    console.warn('Error fetching private inventory:', e);
-    throw new Error(`Error fetching private inventory: ${e}`)
+  if (error) {
+    console.error('Error fetching private inventory:', error);
+    throw new GetPrivateEnventoryError(`Error fetching private inventory: ${error}`);
   }
+
+  if (!data) {
+    return [];
+  }
+
+  const inventory: InventoryItem[] = data.map((item) => {
+    return {
+      id: item.id,
+      name: item.item_name,
+      company: item.parent_company,
+      quantity: item.quantity,
+      unit: item.quantity_unit,
+    };
+  });
+
+  return inventory;
 }
 
 const addPrivateInventory = async (dto: AddInventoryDto) => {
@@ -38,7 +56,8 @@ const addPrivateInventory = async (dto: AddInventoryDto) => {
       currency: dto.currency,
       // price_per_unit: dto.pricePerUnit,
       quantity: dto.quantity,
-      quantity_unit: dto.quantityUnit
+      quantity_unit: dto.quantityUnit,
+      owner_id: dto.ownerId,
     });
 
   if (error) {
