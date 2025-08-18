@@ -13,8 +13,10 @@ export type AddInventoryDto = {
 
 export type InventoryItem = {
   id: string;
-  name: string;
+  itemName: string;
   company: string;
+  currency: string;
+  totalPrice: number;
   quantity: number;
   unit: string;
 }
@@ -36,12 +38,16 @@ const getPrivateInventory = async (): Promise<InventoryItem[]> => {
   const inventory: InventoryItem[] = data.map((item) => {
     return {
       id: item.id,
-      name: item.item_name,
+      itemName: item.item_name,
       company: item.parent_company,
+      currency: item.currency,
+      totalPrice: item.price,
       quantity: item.quantity,
       unit: item.quantity_unit,
     };
   });
+
+  console.log('inventory: ', inventory);
 
   return inventory;
 }

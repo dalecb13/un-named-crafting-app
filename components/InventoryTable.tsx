@@ -6,6 +6,15 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { getPrivateInventory, InventoryItem } from '@/data-access/private-inventory';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 const AUTH_TIMEOUT = 15000; // 15 seconds
 
@@ -68,15 +77,35 @@ export const InventoryTable = () => {
 
   return (
     <div className="flex justify-between">
-      {
-        inventoryItems.map(inventoryItem => {
-          return (
-            <div key={inventoryItem.id}>
-              {inventoryItem.name}
-            </div>
-          )
-        })
-      }
+      <Table>
+        <TableCaption>A list of your recent invoices.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Item Name</TableHead>
+            <TableHead>Quantity</TableHead>
+            <TableHead>Total Price</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {/* <TableRow>
+            <TableCell className="font-medium">INV001</TableCell>
+            <TableCell>Item Name</TableCell>
+            <TableCell>Quantity</TableCell>
+          </TableRow> */}
+
+          {
+            inventoryItems.map(inventoryItem => {
+              return (
+                <TableRow key={inventoryItem.id}>
+                  <TableCell>{inventoryItem.itemName}</TableCell>
+                  <TableCell>{inventoryItem.quantity}{inventoryItem.unit}</TableCell>
+                  <TableCell>{inventoryItem.currency}{inventoryItem.totalPrice}</TableCell>
+                </TableRow>
+              )
+            })
+          }
+        </TableBody>
+      </Table>
     </div>
   )
 }
