@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 
 const ProductsPage = () => {
@@ -9,10 +11,10 @@ const ProductsPage = () => {
         <h1>Products Table</h1>
 
         <button
-          onClick={() => router.push('/inventory/add')}
+          onClick={() => router.push('/products/add')}
           className="hidden sm:block px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-medium transition-colors shadow-subtle hover:shadow-hover"
         >
-          Add Inventory
+          Add Product
         </button>
       </div>
     </div>
