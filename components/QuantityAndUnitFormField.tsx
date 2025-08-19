@@ -18,7 +18,7 @@ const QuantityAndUnitFormField: React.FC<Props> = ({ quantity, onChangeQuantity,
         htmlFor="quantityAndUnit"
         className="text-sm font-medium text-slate-700 mb-2"
       >
-        Total Price
+        Quantity
       </Label>
       <div className="relative inline-flex w-full">
         <Input

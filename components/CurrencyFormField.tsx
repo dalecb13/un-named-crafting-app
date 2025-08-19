@@ -17,7 +17,7 @@ const CurrencyFormField: React.FC<Props> = ({ currencies, currency, onChangeCurr
         htmlFor="currencyAndPrice"
         className="text-sm font-medium text-slate-700 mb-2"
       >
-        Amount
+        Total Price
       </Label>
       <div className="relative inline-flex w-full">
         <Select
