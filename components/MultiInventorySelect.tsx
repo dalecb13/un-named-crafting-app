@@ -55,6 +55,16 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
     }
   }
 
+  const handleChooseInventory = (chosenItemId: string, index: number) => {
+    console.log('handleChooseInventory', chosenItemId, index);
+
+    console.log('inventoryItems', inventoryItems);
+    const item = inventoryItems.find(item => item.id === chosenItemId)!;
+    console.log('found item', item);
+    chosenInventory.splice(index, 1, item);
+    setChosenInventory([...chosenInventory]);
+  }
+
   const handleChangeQuantity = (quantity: number) => {
     setChosenInventory(chosenInventory.map((item, index) => {
       if (index === chosenInventory.length - 1) {
@@ -75,12 +85,12 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
         {chosenInventory.map((item, index) => (
           <div
             className="flex flex-row gap-2"
-            key={index}
+            key={item.id}
           >
             <Select
               name="inventoryItem"
-              value={item.itemName}
-              onValueChange={() => {}}
+              value={item.id}
+              onValueChange={(chosenItemId) => handleChooseInventory(chosenItemId, index)}
             >
               <SelectTrigger
                 className="w-[500px]"
@@ -92,7 +102,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
                   inventoryItems.map((ii) => (
                     <SelectItem
                       key={ii.id}
-                      value={ii.itemName}
+                      value={ii.id}
                     >
                       {ii.itemName}
                     </SelectItem>
@@ -109,7 +119,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
               value={item.quantity}
               onChange={(e) => handleChangeQuantity(Number(e.target.value))}
             />
-            <Input type="text" placeholder="Unit" />
+            <Input id="unit" type="text" placeholder="Unit" />
             <Button
               onClick={() => handleRemoveItem(item.id)}
             >
