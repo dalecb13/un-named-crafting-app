@@ -1,19 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+import { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Trash2 } from 'lucide-react';
@@ -109,14 +96,16 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
 
             {
               item.id !== "" && <>
-                <Input
-                  id="quantityAndUnit"
-                  className="w-full rounded-none rounded-l-lg"
-                  type="number"
-                  placeholder="Quantity"
-                  value={item.quantity}
-                  onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-                />
+                <div className="flex flex-col">
+                  <Input
+                    id="quantityAndUnit"
+                    className="w-full"
+                    type="number"
+                    placeholder="Quantity"
+                    value={item.quantity}
+                    onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+                  />
+                </div>
                 <p>{item.unit}</p>
                 <Button
                   size="icon"

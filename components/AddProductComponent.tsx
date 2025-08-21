@@ -4,22 +4,6 @@ import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { getPrivateInventory } from "@/data-access/private-inventory";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Check, ChevronsUpDown } from "lucide-react"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { Button } from "./ui/button";
 import MultiInventorySelect from "./MultiInventorySelect";
 
 type InventoryItemOption = {
@@ -32,14 +16,6 @@ type InventoryItemOption = {
 const AddProductComponent = () => {
   const [productName, setProductName] = useState('');
   const [inventoryItems, setInventoryItems] = useState<InventoryItemOption[]>([]);
-  const [selectedInventoryItems, setSelectedInventoryItems] = useState<InventoryItemOption[]>([
-    {
-      id: '',
-      itemName: '',
-      quantity: 0,
-      unit: '',
-    }
-  ]);
 
   useEffect(() => {
     const getInventory = async () => {
@@ -58,20 +34,6 @@ const AddProductComponent = () => {
 
     getInventory();
   }, []);
-
-  const handleSelectItem = (id: string) => {
-    const index = selectedInventoryItems.findIndex(si => si.id === id);
-    const newSelectedInventoryItems = [...selectedInventoryItems];
-    newSelectedInventoryItems.splice(index, 1);
-    setSelectedInventoryItems(newSelectedInventoryItems);
-  }
-
-  const handleChangeQuantity = (id: string, quantity: number) => {
-    const index = selectedInventoryItems.findIndex(si => si.id === id);
-    const newSelectedInventoryItems = [...selectedInventoryItems];
-    newSelectedInventoryItems[index].quantity = quantity;
-    setSelectedInventoryItems(newSelectedInventoryItems);
-  }
 
   return (
     <div className="p-8 space-y-4">
