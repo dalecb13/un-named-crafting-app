@@ -1,6 +1,6 @@
 "use client";
 
-import AddProductForm from '@/components/AddProductForm';
+import AddProductComponent from '@/components/AddProductComponent';
 import { ArrowLeft } from 'lucide-react';
 import { useRouter } from "next/navigation";
 
@@ -14,7 +14,7 @@ const AddProductPage = () => {
         <h1 className='text-lg ml-2'>Add Product</h1>
       </div>
 
-      <AddProductForm />
+      <AddProductComponent />
     </div>
   )
 }
