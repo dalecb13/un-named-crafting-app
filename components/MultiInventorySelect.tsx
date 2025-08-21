@@ -26,7 +26,9 @@ type ChosenInventory = {
 }
 
 const MultiInventorySelect = () => {
-  const [chosenInventory, setChosenInventory] = useState<ChosenInventory[]>([]);
+  const [chosenInventory, setChosenInventory] = useState<ChosenInventory[]>([
+    { id: "", itemName: "", quantity: 0, unit: "" }
+  ]);
 
   const handleAddInventory = () => {
     if (chosenInventory.length === 0) {
@@ -47,7 +49,7 @@ const MultiInventorySelect = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <button onClick={handleAddInventory}>Add Inventory</button>
+      <p onClick={handleAddInventory}>Inventory Items that make the product</p>
       <div className="flex flex-col gap-2">
         {chosenInventory.map((item, index) => (
           <div
