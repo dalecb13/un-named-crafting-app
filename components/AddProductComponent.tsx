@@ -76,23 +76,23 @@ const AddProductComponent = () => {
   }
 
   return (
-    <div className="p-8">
-      <MultiInventorySelect />
-      {/* <div className="space-y-2">
+    <div className="p-8 space-y-4">
+      <div className="space-y-2">
         <Label
           htmlFor="productName"
           className="text-sm font-medium text-slate-700"
         >
           Product Name
         </Label>
-        <Select
-          name="inventoryItem"
-          value={}
-        >
+        <Input
+          id="productName"
+          placeholder="Terracotta"
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
+        />
+      </div>
 
-        </Select>
-      </div> */}
-
+      <MultiInventorySelect />
 
     </div>
   )
