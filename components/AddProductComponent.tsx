@@ -90,7 +90,9 @@ const AddProductComponent = () => {
         />
       </div>
 
-      <MultiInventorySelect />
+      <MultiInventorySelect
+        inventoryItems={inventoryItems}
+      />
 
     </div>
   )

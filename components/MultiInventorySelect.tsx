@@ -17,6 +17,7 @@ import {
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { X } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 type ChosenInventory = {
   id: string;
@@ -25,7 +26,18 @@ type ChosenInventory = {
   unit: string;
 }
 
-const MultiInventorySelect = () => {
+type InventoryItemOption = {
+  id: string
+  itemName: string
+  quantity: number
+  unit: string
+}
+
+type Props = {
+  inventoryItems: InventoryItemOption[]
+}
+
+const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
   const [chosenInventory, setChosenInventory] = useState<ChosenInventory[]>([
     { id: "", itemName: "", quantity: 0, unit: "" }
   ]);
@@ -65,7 +77,30 @@ const MultiInventorySelect = () => {
             className="flex flex-row gap-2"
             key={index}
           >
-            <Input type="text" placeholder="Item Name" />
+            <Select
+              name="inventoryItem"
+              value={item.itemName}
+              onValueChange={() => {}}
+            >
+              <SelectTrigger
+                className="w-[500px]"
+              >
+                <SelectValue placeholder="Unit" />
+              </SelectTrigger>
+              <SelectContent>
+                {
+                  inventoryItems.map((ii) => (
+                    <SelectItem
+                      key={ii.id}
+                      value={ii.itemName}
+                    >
+                      {ii.itemName}
+                    </SelectItem>
+                  ))
+                }
+              </SelectContent>
+            </Select>
+
             <Input
               id="quantityAndUnit"
               className="w-full rounded-none rounded-l-lg"
