@@ -43,6 +43,15 @@ const MultiInventorySelect = () => {
     }
   }
 
+  const handleChangeQuantity = (quantity: number) => {
+    setChosenInventory(chosenInventory.map((item, index) => {
+      if (index === chosenInventory.length - 1) {
+        return { ...item, quantity };
+      }
+      return item;
+    }));
+  }
+
   const handleRemoveItem = (itemId: string) => {
     setChosenInventory(chosenInventory.filter(item => item.id !== itemId));
   }
@@ -57,7 +66,14 @@ const MultiInventorySelect = () => {
             key={index}
           >
             <Input type="text" placeholder="Item Name" />
-            <Input type="number" placeholder="Quantity" />
+            <Input
+              id="quantityAndUnit"
+              className="w-full rounded-none rounded-l-lg"
+              type="number"
+              placeholder="Quantity"
+              value={item.quantity}
+              onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+            />
             <Input type="text" placeholder="Unit" />
             <Button
               onClick={() => handleRemoveItem(item.id)}
