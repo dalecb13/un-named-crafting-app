@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/popover"
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { X } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 type ChosenInventory = {
@@ -56,11 +56,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
   }
 
   const handleChooseInventory = (chosenItemId: string, index: number) => {
-    console.log('handleChooseInventory', chosenItemId, index);
-
-    console.log('inventoryItems', inventoryItems);
     const item = inventoryItems.find(item => item.id === chosenItemId)!;
-    console.log('found item', item);
     chosenInventory.splice(index, 1, item);
     setChosenInventory([...chosenInventory]);
   }
@@ -84,7 +80,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
       <div className="flex flex-col gap-2">
         {chosenInventory.map((item, index) => (
           <div
-            className="flex flex-row gap-2"
+            className="flex flex-row items-end gap-2"
             key={item.id}
           >
             <Select
@@ -111,20 +107,27 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
               </SelectContent>
             </Select>
 
-            <Input
-              id="quantityAndUnit"
-              className="w-full rounded-none rounded-l-lg"
-              type="number"
-              placeholder="Quantity"
-              value={item.quantity}
-              onChange={(e) => handleChangeQuantity(Number(e.target.value))}
-            />
-            <Input id="unit" type="text" placeholder="Unit" />
-            <Button
-              onClick={() => handleRemoveItem(item.id)}
-            >
-              <X />
-            </Button>
+            {
+              item.id !== "" && <>
+                <Input
+                  id="quantityAndUnit"
+                  className="w-full rounded-none rounded-l-lg"
+                  type="number"
+                  placeholder="Quantity"
+                  value={item.quantity}
+                  onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+                />
+                <p>{item.unit}</p>
+                <Button
+                  size="icon"
+                  variant="destructive"
+                  className="size-8 px-2"
+                  onClick={() => handleRemoveItem(item.id)}
+                >
+                  <Trash2 />
+                </Button>
+              </>
+            }
           </div>
         ))}
       </div>
