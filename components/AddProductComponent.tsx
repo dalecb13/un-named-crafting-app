@@ -20,7 +20,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Button } from "./ui/button";
-import QuantityAndUnitFormField from "./QuantityAndUnitFormField";
 import MultiInventorySelect from "./MultiInventorySelect";
 
 type InventoryItemOption = {
@@ -33,7 +32,6 @@ type InventoryItemOption = {
 const AddProductComponent = () => {
   const [productName, setProductName] = useState('');
   const [inventoryItems, setInventoryItems] = useState<InventoryItemOption[]>([]);
-  const [open, setOpen] = useState(false)
   const [selectedInventoryItems, setSelectedInventoryItems] = useState<InventoryItemOption[]>([
     {
       id: '',
