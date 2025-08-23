@@ -1,5 +1,6 @@
 "use client";
 
+import ProductsTable from "@/components/ProductsTable";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -22,6 +23,8 @@ const ProductsPage = () => {
           Add Product
         </Button>
       </div>
+
+      <ProductsTable />
     </div>
   )
 }
