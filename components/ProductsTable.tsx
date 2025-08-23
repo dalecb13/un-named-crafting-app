@@ -6,7 +6,15 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { getProducts, Product } from '@/data-access/products';
-import { ArrowLeft } from 'lucide-react';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 const AUTH_TIMEOUT = 15000; // 15 seconds
 
@@ -67,9 +75,30 @@ const ProductsTable = () => {
   }
 
   return (
-    <div className="flex items-center">
-      <ArrowLeft size={20} onClick={() => router.back()} className='cursor-pointer hover:text-gray-500' />
-      <h1>Products</h1>
+    <div className="flex justify-between px-8">
+      <Table>
+        <TableCaption>A list of your inventory.</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Item Name</TableHead>
+            <TableHead>Quantity</TableHead>
+            {/* <TableHead>Total Price</TableHead> */}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {
+            products.map(product => {
+              return (
+                <TableRow key={product.id}>
+                  <TableCell>{product.productName}</TableCell>
+                  <TableCell>{product.numberOfUnits}</TableCell>
+                  {/* <TableCell>{product.currency}{product.totalPrice}</TableCell> */}
+                </TableRow>
+              )
+            })
+          }
+        </TableBody>
+      </Table>
     </div>
   )
 }

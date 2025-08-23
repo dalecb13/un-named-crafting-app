@@ -2,6 +2,7 @@ import { GetProductError } from "@/utils/error";
 import { supabase } from "@/utils/supabase";
 
 export type Product = {
+  id: string;
   productName: string;
   productDescription: string;
   tags: string[];
