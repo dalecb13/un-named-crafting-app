@@ -18,11 +18,11 @@ import {
 
 const AUTH_TIMEOUT = 15000; // 15 seconds
 
-export const InventoryTable = () => {
+const InventoryTable = () => {
   const router = useRouter();
   const { user, isLoading: isAuthLoading } = useAuth();
-  const { isInTrial, trialEndTime, isLoading: isTrialLoading } = useTrialStatus();
-  const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false);
+  const { isLoading: isTrialLoading } = useTrialStatus();
+  const [hasCompletedOnboarding] = useState(false);
   const [authTimeout, setAuthTimeout] = useState(false);
   const [ isNoData, setIsNoData ] = useState(true);
   const [ inventoryItems, setInventoryItems] = useState<InventoryItem[]>([]);
@@ -102,3 +102,5 @@ export const InventoryTable = () => {
     </div>
   )
 }
+
+export default InventoryTable;

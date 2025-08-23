@@ -1,6 +1,6 @@
 "use client";
 
-import { InventoryTable } from "@/components/InventoryTable";
+import InventoryTable from "@/components/InventoryTable";
 import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useTrialStatus } from "@/hooks/useTrialStatus";
@@ -124,9 +124,9 @@ export default function Inventory() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="p-8 w-full flex justify-between">
-        <div className="">
+        <div className="flex items-center">
           <ArrowLeft size={20} onClick={() => router.back()} className='cursor-pointer hover:text-gray-500' />
-          <h1>Inventory Table</h1>
+          <h1 className='text-lg ml-2'>Inventory Table</h1>
         </div>
 
         <button
