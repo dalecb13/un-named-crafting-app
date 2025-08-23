@@ -12,7 +12,15 @@ class AddPrivateInventoryError extends Error {
   }
 }
 
+class GetProductError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "GetProductError";
+  }
+}
+
 export {
   GetPrivateEnventoryError,
   AddPrivateInventoryError,
+  GetProductError,
 }
