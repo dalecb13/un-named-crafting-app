@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useTrialStatus } from "@/hooks/useTrialStatus";
 import { supabase } from "@/utils/supabase";
+import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -123,7 +124,10 @@ export default function Inventory() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="p-8 w-full flex justify-between">
-        <h1>Inventory Table</h1>
+        <div className="">
+          <ArrowLeft size={20} onClick={() => router.back()} className='cursor-pointer hover:text-gray-500' />
+          <h1>Inventory Table</h1>
+        </div>
 
         <button
           onClick={() => router.push('/inventory/add')}

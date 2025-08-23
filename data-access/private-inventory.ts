@@ -47,8 +47,6 @@ const getPrivateInventory = async (): Promise<InventoryItem[]> => {
     };
   });
 
-  console.log('inventory: ', inventory);
-
   return inventory;
 }
 
