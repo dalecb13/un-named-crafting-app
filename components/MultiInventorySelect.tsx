@@ -63,7 +63,16 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <p onClick={handleAddInventory}>Inventory Items that make the product</p>
+      <div className="flex justify-between items-center w-full">
+        <p>What is required to make one of this product?</p>
+        <Button
+          className="bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-medium transition-colors shadow-subtle hover:shadow-hover"
+          onClick={handleAddInventory}
+        >
+          Add Inventory
+        </Button>
+      </div>
+
       <div className="flex flex-col gap-2">
         {chosenInventory.map((item, index) => (
           <div

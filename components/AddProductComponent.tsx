@@ -16,6 +16,7 @@ type InventoryItemOption = {
 const AddProductComponent = () => {
   const [productName, setProductName] = useState('');
   const [inventoryItems, setInventoryItems] = useState<InventoryItemOption[]>([]);
+  const [productQuantity, setProductQuantity] = useState(0);
 
   useEffect(() => {
     const getInventory = async () => {
@@ -55,6 +56,22 @@ const AddProductComponent = () => {
       <MultiInventorySelect
         inventoryItems={inventoryItems}
       />
+
+      <div className="space-y-2">
+        <Label
+          htmlFor="productQuantity"
+          className="text-sm font-medium text-slate-700"
+        >
+          Quantity
+        </Label>
+        <Input
+          id="productQuantity"
+          placeholder="Terracotta"
+          value={productQuantity}
+          type="number"
+          onChange={(e) => setProductQuantity(Number(e.target.value))}
+        />
+      </div>
 
     </div>
   )
