@@ -19,9 +19,10 @@ type Props = {
   setChosenInventory: (ci: InventoryItemOption[]) => void
   onAddInventory: () => void
   onChooseInventory: (itemId: string, index: number) => void;
+  onRemoveInventoryItem: (itemId: string) => void;
 }
 
-const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, setChosenInventory, onAddInventory, onChooseInventory }) => {
+const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, setChosenInventory, onAddInventory, onChooseInventory, onRemoveInventoryItem }) => {
 
   const handleChangeQuantity = (quantity: number) => {
     setChosenInventory(chosenInventory.map((item, index) => {
@@ -32,9 +33,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory
     }));
   }
 
-  const handleRemoveItem = (itemId: string) => {
-    setChosenInventory(chosenInventory.filter(item => item.id !== itemId));
-  }
+  
 
   return (
     <div className="flex flex-col gap-2">
@@ -95,7 +94,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory
                   size="icon"
                   variant="destructive"
                   className="size-8 px-2"
-                  onClick={() => handleRemoveItem(item.id)}
+                  onClick={() => onRemoveInventoryItem(item.id)}
                 >
                   <Trash2 />
                 </Button>

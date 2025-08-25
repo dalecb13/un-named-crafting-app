@@ -68,6 +68,10 @@ const AddProductComponent = () => {
     setChosenInventory([...chosenInventory]);
   }
 
+  const handleRemoveItem = (itemId: string) => {
+    setChosenInventory(chosenInventory.filter(item => item.id !== itemId));
+  }
+
   return (
     <div className="p-8 space-y-4">
       <div className="space-y-2">
@@ -91,6 +95,7 @@ const AddProductComponent = () => {
         setChosenInventory={setChosenInventory}
         onAddInventory={handleAddInventory}
         onChooseInventory={handleChooseInventory}
+        onRemoveInventoryItem={handleRemoveItem}
       />
 
       <div className="space-y-2">
