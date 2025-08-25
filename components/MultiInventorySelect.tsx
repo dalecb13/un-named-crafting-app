@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { Trash2 } from 'lucide-react';
+import { Plus, Trash2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 type ChosenInventory = {
@@ -11,6 +11,7 @@ type ChosenInventory = {
   itemName: string;
   quantity: number;
   unit: string;
+  pricePerUnit: number;
 }
 
 type InventoryItemOption = {
@@ -18,6 +19,7 @@ type InventoryItemOption = {
   itemName: string
   quantity: number
   unit: string
+  pricePerUnit: number
 }
 
 type Props = {
@@ -26,18 +28,18 @@ type Props = {
 
 const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
   const [chosenInventory, setChosenInventory] = useState<ChosenInventory[]>([
-    { id: "", itemName: "", quantity: 0, unit: "" }
+    { id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }
   ]);
 
   const handleAddInventory = () => {
     if (chosenInventory.length === 0) {
-      setChosenInventory([{ id: "", itemName: "", quantity: 0, unit: "" }]);
+      setChosenInventory([{ id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }]);
       return;
     }
 
     const lastItem = chosenInventory[chosenInventory.length - 1];
     if (lastItem.id === "") {
-      setChosenInventory([...chosenInventory, { id: "", itemName: "", quantity: 0, unit: "" }]);
+      setChosenInventory([...chosenInventory, { id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }]);
       return;
     }
   }
@@ -69,7 +71,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
           className="bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-medium transition-colors shadow-subtle hover:shadow-hover"
           onClick={handleAddInventory}
         >
-          Add Inventory
+          <Plus /> Inventory
         </Button>
       </div>
 

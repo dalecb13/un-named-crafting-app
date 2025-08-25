@@ -19,6 +19,7 @@ export type InventoryItem = {
   totalPrice: number;
   quantity: number;
   unit: string;
+  pricePerUnit: number;
 }
 
 const getPrivateInventory = async (): Promise<InventoryItem[]> => {
@@ -44,6 +45,7 @@ const getPrivateInventory = async (): Promise<InventoryItem[]> => {
       totalPrice: item.price,
       quantity: item.quantity,
       unit: item.quantity_unit,
+      pricePerUnit: item.price_per_unit,
     };
   });
 
@@ -58,7 +60,7 @@ const addPrivateInventory = async (dto: AddInventoryDto) => {
       parent_company: dto.company,
       price: dto.price,
       currency: dto.currency,
-      // price_per_unit: dto.pricePerUnit,
+      price_per_unit: dto.price / dto.quantity,
       quantity: dto.quantity,
       quantity_unit: dto.quantityUnit,
       owner_id: dto.ownerId,

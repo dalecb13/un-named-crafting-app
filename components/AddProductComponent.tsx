@@ -11,6 +11,7 @@ type InventoryItemOption = {
   itemName: string
   quantity: number
   unit: string
+  pricePerUnit: number
 }
 
 const AddProductComponent = () => {
@@ -27,6 +28,7 @@ const AddProductComponent = () => {
           itemName: d.itemName,
           quantity: d.quantity,
           unit: d.unit,
+          pricePerUnit: d.pricePerUnit
         }
       });
 
@@ -73,6 +75,10 @@ const AddProductComponent = () => {
         />
       </div>
 
+      <div className="space-y-2">
+        <p>Price per Unit</p>
+        <p></p>
+      </div>
     </div>
   )
 }
