@@ -16,25 +16,13 @@ type InventoryItemOption = {
 type Props = {
   inventoryItems: InventoryItemOption[]
   chosenInventory: InventoryItemOption[]
-  setChosenInventory: (ci: InventoryItemOption[]) => void
   onAddInventory: () => void
   onChooseInventory: (itemId: string, index: number) => void;
   onRemoveInventoryItem: (itemId: string) => void;
+  onChangeItemQuantity: (itemId: string, quantity: number) => void
 }
 
-const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, setChosenInventory, onAddInventory, onChooseInventory, onRemoveInventoryItem }) => {
-
-  const handleChangeQuantity = (quantity: number) => {
-    setChosenInventory(chosenInventory.map((item, index) => {
-      if (index === chosenInventory.length - 1) {
-        return { ...item, quantity };
-      }
-      return item;
-    }));
-  }
-
-  
-
+const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, onAddInventory, onChooseInventory, onRemoveInventoryItem, onChangeItemQuantity }) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center w-full">
@@ -86,7 +74,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory
                     type="number"
                     placeholder="Quantity"
                     value={item.quantity}
-                    onChange={(e) => handleChangeQuantity(Number(e.target.value))}
+                    onChange={(e) => onChangeItemQuantity(item.id, Number(e.target.value))}
                   />
                 </div>
                 <p>{item.unit}</p>

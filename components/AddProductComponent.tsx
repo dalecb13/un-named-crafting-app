@@ -72,6 +72,15 @@ const AddProductComponent = () => {
     setChosenInventory(chosenInventory.filter(item => item.id !== itemId));
   }
 
+  const handleChangeQuantity = (itemId: string, quantity: number) => {
+    setChosenInventory(chosenInventory.map((item, index) => {
+      if (index === chosenInventory.length - 1) {
+        return { ...item, quantity };
+      }
+      return item;
+    }));
+  }
+
   return (
     <div className="p-8 space-y-4">
       <div className="space-y-2">
@@ -92,10 +101,10 @@ const AddProductComponent = () => {
       <MultiInventorySelect
         inventoryItems={inventoryItems}
         chosenInventory={chosenInventory}
-        setChosenInventory={setChosenInventory}
         onAddInventory={handleAddInventory}
         onChooseInventory={handleChooseInventory}
         onRemoveInventoryItem={handleRemoveItem}
+        onChangeItemQuantity={handleChangeQuantity}
       />
 
       <div className="space-y-2">
