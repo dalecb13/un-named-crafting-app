@@ -18,15 +18,10 @@ type Props = {
   chosenInventory: InventoryItemOption[]
   setChosenInventory: (ci: InventoryItemOption[]) => void
   onAddInventory: () => void
+  onChooseInventory: (itemId: string, index: number) => void;
 }
 
-const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, setChosenInventory, onAddInventory }) => {
-
-  const handleChooseInventory = (chosenItemId: string, index: number) => {
-    const item = inventoryItems.find(item => item.id === chosenItemId)!;
-    chosenInventory.splice(index, 1, item);
-    setChosenInventory([...chosenInventory]);
-  }
+const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, setChosenInventory, onAddInventory, onChooseInventory }) => {
 
   const handleChangeQuantity = (quantity: number) => {
     setChosenInventory(chosenInventory.map((item, index) => {
@@ -62,7 +57,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory
             <Select
               name="inventoryItem"
               value={item.id}
-              onValueChange={(chosenItemId) => handleChooseInventory(chosenItemId, index)}
+              onValueChange={(chosenItemId) => onChooseInventory(chosenItemId, index)}
             >
               <SelectTrigger
                 className="w-[500px]"

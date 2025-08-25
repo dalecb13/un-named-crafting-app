@@ -62,6 +62,12 @@ const AddProductComponent = () => {
     }
   }
 
+  const handleChooseInventory = (chosenItemId: string, index: number) => {
+    const item = inventoryItems.find(item => item.id === chosenItemId)!;
+    chosenInventory.splice(index, 1, item);
+    setChosenInventory([...chosenInventory]);
+  }
+
   return (
     <div className="p-8 space-y-4">
       <div className="space-y-2">
@@ -84,6 +90,7 @@ const AddProductComponent = () => {
         chosenInventory={chosenInventory}
         setChosenInventory={setChosenInventory}
         onAddInventory={handleAddInventory}
+        onChooseInventory={handleChooseInventory}
       />
 
       <div className="space-y-2">
