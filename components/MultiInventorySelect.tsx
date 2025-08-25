@@ -1,18 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Plus, Trash2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-
-type ChosenInventory = {
-  id: string;
-  itemName: string;
-  quantity: number;
-  unit: string;
-  pricePerUnit: number;
-}
 
 type InventoryItemOption = {
   id: string
@@ -24,12 +15,11 @@ type InventoryItemOption = {
 
 type Props = {
   inventoryItems: InventoryItemOption[]
+  chosenInventory: InventoryItemOption[]
+  setChosenInventory: (ci: InventoryItemOption[]) => void
 }
 
-const MultiInventorySelect: React.FC<Props> = ({ inventoryItems }) => {
-  const [chosenInventory, setChosenInventory] = useState<ChosenInventory[]>([
-    { id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }
-  ]);
+const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, setChosenInventory }) => {
 
   const handleAddInventory = () => {
     if (chosenInventory.length === 0) {

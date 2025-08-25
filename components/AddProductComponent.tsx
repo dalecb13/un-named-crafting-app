@@ -14,9 +14,20 @@ type InventoryItemOption = {
   pricePerUnit: number
 }
 
+type ChosenInventory = {
+  id: string;
+  itemName: string;
+  quantity: number;
+  unit: string;
+  pricePerUnit: number;
+}
+
 const AddProductComponent = () => {
   const [productName, setProductName] = useState('');
   const [inventoryItems, setInventoryItems] = useState<InventoryItemOption[]>([]);
+  const [chosenInventory, setChosenInventory] = useState<ChosenInventory[]>([
+    { id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }
+  ]);
   const [productQuantity, setProductQuantity] = useState(0);
 
   useEffect(() => {
@@ -57,6 +68,8 @@ const AddProductComponent = () => {
 
       <MultiInventorySelect
         inventoryItems={inventoryItems}
+        chosenInventory={chosenInventory}
+        setChosenInventory={setChosenInventory}
       />
 
       <div className="space-y-2">
