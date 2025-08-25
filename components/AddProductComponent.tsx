@@ -49,6 +49,19 @@ const AddProductComponent = () => {
     getInventory();
   }, []);
 
+  const handleAddInventory = () => {
+    if (chosenInventory.length === 0) {
+      setChosenInventory([{ id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }]);
+      return;
+    }
+
+    const lastItem = chosenInventory[chosenInventory.length - 1];
+    if (lastItem.id === "") {
+      setChosenInventory([...chosenInventory, { id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }]);
+      return;
+    }
+  }
+
   return (
     <div className="p-8 space-y-4">
       <div className="space-y-2">
@@ -70,6 +83,7 @@ const AddProductComponent = () => {
         inventoryItems={inventoryItems}
         chosenInventory={chosenInventory}
         setChosenInventory={setChosenInventory}
+        onAddInventory={handleAddInventory}
       />
 
       <div className="space-y-2">

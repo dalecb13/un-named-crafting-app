@@ -17,22 +17,10 @@ type Props = {
   inventoryItems: InventoryItemOption[]
   chosenInventory: InventoryItemOption[]
   setChosenInventory: (ci: InventoryItemOption[]) => void
+  onAddInventory: () => void
 }
 
-const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, setChosenInventory }) => {
-
-  const handleAddInventory = () => {
-    if (chosenInventory.length === 0) {
-      setChosenInventory([{ id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }]);
-      return;
-    }
-
-    const lastItem = chosenInventory[chosenInventory.length - 1];
-    if (lastItem.id === "") {
-      setChosenInventory([...chosenInventory, { id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }]);
-      return;
-    }
-  }
+const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory, setChosenInventory, onAddInventory }) => {
 
   const handleChooseInventory = (chosenItemId: string, index: number) => {
     const item = inventoryItems.find(item => item.id === chosenItemId)!;
@@ -59,7 +47,7 @@ const MultiInventorySelect: React.FC<Props> = ({ inventoryItems, chosenInventory
         <p>What is required to make one of this product?</p>
         <Button
           className="bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-medium transition-colors shadow-subtle hover:shadow-hover"
-          onClick={handleAddInventory}
+          onClick={onAddInventory}
         >
           <Plus /> Inventory
         </Button>
