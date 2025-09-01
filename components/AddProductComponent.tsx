@@ -50,13 +50,10 @@ const AddProductComponent = () => {
   }, []);
 
   const pricePerProduct = useMemo(() => {
-    console.log('memoized change!', chosenInventory, productQuantity);
     const totalPrice = chosenInventory
       .reduce((acc, item) => {
-        console.log('useMemo item', item);
         return acc + item.pricePerUnit * item.quantity
       }, 0);
-      console.log('computed change', totalPrice, productQuantity);
     return totalPrice / productQuantity;
   }, [chosenInventory, productQuantity]);
 
@@ -75,7 +72,6 @@ const AddProductComponent = () => {
 
   const handleChooseInventory = (chosenItemId: string, index: number) => {
     const item = inventoryItems.find(item => item.id === chosenItemId)!;
-    console.log('handleChooseInventory', item);
     chosenInventory.splice(index, 1, item);
     setChosenInventory([...chosenInventory]);
   }
