@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { getPrivateInventory } from "@/data-access/private-inventory";
@@ -49,6 +49,17 @@ const AddProductComponent = () => {
     getInventory();
   }, []);
 
+  const pricePerProduct = useMemo(() => {
+    console.log('memoized change!', chosenInventory, productQuantity);
+    const totalPrice = chosenInventory
+      .reduce((acc, item) => {
+        console.log('useMemo item', item);
+        return acc + item.pricePerUnit * item.quantity
+      }, 0);
+      console.log('computed change', totalPrice, productQuantity);
+    return totalPrice / productQuantity;
+  }, [chosenInventory, productQuantity]);
+
   const handleAddInventory = () => {
     if (chosenInventory.length === 0) {
       setChosenInventory([{ id: "", itemName: "", quantity: 0, unit: "", pricePerUnit: 0 }]);
@@ -64,6 +75,7 @@ const AddProductComponent = () => {
 
   const handleChooseInventory = (chosenItemId: string, index: number) => {
     const item = inventoryItems.find(item => item.id === chosenItemId)!;
+    console.log('handleChooseInventory', item);
     chosenInventory.splice(index, 1, item);
     setChosenInventory([...chosenInventory]);
   }
@@ -73,7 +85,7 @@ const AddProductComponent = () => {
   }
 
   const handleChangeQuantity = (itemId: string, quantity: number) => {
-    setChosenInventory(chosenInventory.map((item, index) => {
+    setChosenInventory(chosenInventory.map((item, index) => { 
       if (index === chosenInventory.length - 1) {
         return { ...item, quantity };
       }
@@ -125,7 +137,11 @@ const AddProductComponent = () => {
 
       <div className="space-y-2">
         <p>Price per Unit</p>
-        <p></p>
+        {
+          productQuantity === 0
+            ? <p>USD0</p>
+            : <p>USD{pricePerProduct}</p>
+        }
       </div>
     </div>
   )
