@@ -5,6 +5,7 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { getPrivateInventory } from "@/data-access/private-inventory";
 import MultiInventorySelect from "./MultiInventorySelect";
+import { Button } from "./ui/button";
 
 type InventoryItemOption = {
   id: string
@@ -89,6 +90,10 @@ const AddProductComponent = () => {
     }));
   }
 
+  const handleCreateProduct = () => {
+    console.log('handleCreateProduct', { productName, chosenInventory, productQuantity, pricePerProduct });
+  }
+
   return (
     <div className="p-8 space-y-4">
       <div className="space-y-2">
@@ -139,6 +144,12 @@ const AddProductComponent = () => {
             : <p>USD{pricePerProduct}</p>
         }
       </div>
+      <Button
+        className="bg-primary hover:bg-primary-dark text-white rounded-full text-sm font-medium transition-colors shadow-subtle hover:shadow-hover"
+        onClick={handleCreateProduct}
+      >
+        Create Product
+      </Button>
     </div>
   )
 }
